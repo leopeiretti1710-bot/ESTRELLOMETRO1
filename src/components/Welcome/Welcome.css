@@ -1,0 +1,8 @@
+.wl{position:relative;z-index:1;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;max-width:420px;margin:auto}
+.wl-logo{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;font-size:70px;background:#141a2e;border:1px solid rgba(246,197,107,.4);box-shadow:0 0 60px rgba(246,197,107,.3);position:relative;animation:wlf 4s ease-in-out infinite}
+.wl-logo i{position:absolute;top:-2px;right:8px;font-style:normal;font-size:16px;width:34px;height:34px;border-radius:50%;background:var(--gold);display:grid;place-items:center}
+@keyframes wlf{50%{transform:translateY(-9px)}}
+.wl h1{font-size:clamp(36px,9vw,48px);font-weight:800;letter-spacing:-1.5px;color:var(--gold);margin:28px 0 8px}
+.wl-st{color:var(--gold);letter-spacing:6px;font-size:13px;margin-bottom:14px}
+.wl p{color:var(--mut);line-height:1.5}.wl p b{display:block;color:var(--gold);font-weight:600;font-size:17px}
+.wl-b{display:grid;gap:14px;width:100%;margin-top:38px}

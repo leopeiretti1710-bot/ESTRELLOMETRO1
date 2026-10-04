@@ -1,0 +1,12 @@
+.pd-ask{text-align:center;padding:40px 10px}.pd-ask p{color:var(--mut);margin:8px 0 24px}
+.pd-trophy{width:110px;height:110px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;font-size:50px;background:#141a2e;border:1px solid rgba(246,197,107,.4);box-shadow:0 0 50px rgba(246,197,107,.3)}
+.pd{position:relative;text-align:center;padding-top:20px;min-height:70dvh;border-radius:26px;background:conic-gradient(from 155deg at 50% -8%,transparent,rgba(246,197,107,.2),transparent 40%)}
+.pd-conf{position:absolute;inset:0;overflow:hidden;pointer-events:none}.pd-conf i{position:absolute;top:-12px;width:7px;height:12px;animation:pdf linear infinite}
+@keyframes pdf{to{transform:translateY(80dvh) rotate(720deg)}}
+.pd-cols{display:flex;align-items:flex-end;justify-content:center;gap:10px;margin:36px auto 0;max-width:620px}
+.pd-col{flex:1;animation:pdr 1s cubic-bezier(.2,.9,.3,1.2) both}@keyframes pdr{from{opacity:0;transform:translateY(140px)}}
+.pd-col img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;border:2px solid #b9892f}
+.pd-col.w img{border:3px solid var(--gold);animation:pdg 2s infinite}@keyframes pdg{0%,100%{box-shadow:0 0 30px rgba(246,197,107,.7)}50%{box-shadow:0 0 60px rgba(246,197,107,1)}}
+.pd-col small{display:block;color:var(--mut);margin:6px 0}
+.pd-bar{border-radius:12px 12px 0 0;display:grid;place-items:center;font-size:26px;font-weight:800;color:var(--gold);background:linear-gradient(180deg,rgba(246,197,107,.45),rgba(246,197,107,.05))}
+.pd-crown{font-size:14px;letter-spacing:-2px;animation:pdc 2s ease-in-out infinite}.pd-crown span{display:block;font-size:30px;letter-spacing:0}@keyframes pdc{50%{transform:translateY(-6px)}}

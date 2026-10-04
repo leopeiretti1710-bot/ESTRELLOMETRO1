@@ -1,0 +1,15 @@
+// SOLO PROTOTIPO: cualquiera puede leer/escribir. Antes de uso público,
+// agregá Firebase Auth anónima y limitá moderación/edición al organizador.
+rules_version = "2";
+service cloud.firestore {
+  match /databases/{db}/documents {
+    match /events/{code} {
+      allow read, create, update: if true;
+      allow delete: if false;
+      match /photos/{id} {
+        allow read, update, delete: if true;
+        allow create: if request.resource.data.src.size() < 900000;
+      }
+    }
+  }
+}

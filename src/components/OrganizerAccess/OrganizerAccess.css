@@ -1,0 +1,10 @@
+.oa{position:relative;z-index:1;max-width:460px;margin:auto;padding:28px 18px}
+.oa-h{display:flex;gap:12px;align-items:center;margin-bottom:16px}.oa-h small{color:var(--mut)}
+.oa-back{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--glass);color:var(--txt);cursor:pointer;font-size:17px}
+.oa-tabs{display:flex;padding:5px;margin-bottom:20px;border-radius:18px}
+.oa-tabs button{flex:1;border:0;background:none;color:var(--mut);font:600 14px Poppins,sans-serif;padding:12px;border-radius:14px;cursor:pointer;transition:.25s}
+.oa-tabs .on{background:var(--gold);color:#1a1204}
+.oa-card{padding:22px;display:grid;gap:12px}.oa-card label{display:grid;gap:6px;font-size:13px;color:var(--mut)}.oa-card small{color:var(--mut);font-size:12px;margin-top:-6px}
+.oa-code{text-transform:uppercase;letter-spacing:3px;font-weight:700;text-align:center}
+.oa-err{color:#ff7a8a;font-size:13px;min-height:18px}
+.oa-pw{display:flex;gap:8px}.oa-pw button{flex:none;width:48px;border:1px solid var(--line);background:var(--glass);border-radius:14px;cursor:pointer;font-size:18px}

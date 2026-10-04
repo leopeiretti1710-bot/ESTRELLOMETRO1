@@ -1,0 +1,20 @@
+.ch-ban{padding:14px;margin-bottom:14px;border-color:rgba(139,124,246,.4);background:rgba(139,124,246,.12)}
+.ch-card{display:flex;gap:14px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;transition:.3s}
+.ch-card:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(246,197,107,.12),transparent 70%);transform:translateX(-100%);transition:.8s}
+.ch-card:hover{border-color:rgba(246,197,107,.5);box-shadow:0 0 30px rgba(246,197,107,.15)}.ch-card:hover:before{transform:translateX(100%)}
+.ch-e{font-size:30px;width:56px;height:56px;flex:none;border-radius:16px;background:rgba(255,255,255,.07);display:grid;place-items:center}
+.ch-card>div:last-child{flex:1}.ch-card p{color:var(--mut);font-size:13px;margin:2px 0 10px}
+.ch-r{display:flex;justify-content:space-between;align-items:center}.ch-r small{color:var(--mut)}
+@media(min-width:900px){.ch-card{max-width:640px}}
+.ch-card:before{pointer-events:none}
+.ch-card.ch-adm{display:block;overflow:visible}.ch-adm:before{display:none}
+.ch-top{display:flex;gap:14px;align-items:flex-start}.ch-tx{flex:1;min-width:0;display:grid;gap:6px}.ch-tx p{margin:0;color:var(--mut);font-size:13px}.ch-tx b{font-size:15px}
+.ch-ac{display:flex;gap:6px}.ch-ac button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--glass);color:var(--txt);cursor:pointer}
+.ch-ph{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:10px}.ch-ph small{color:var(--mut)}
+.ch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.ch-th{position:relative}.ch-th img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block}.ch-th.hid img{opacity:.3}
+.ch-th i{position:absolute;left:6px;bottom:6px;font-style:normal;font-size:10px;background:rgba(0,0,0,.65);color:#fff;padding:2px 7px;border-radius:8px}
+.ch-th .pc-dots{width:30px;height:30px}
+.ch-new{padding:16px;display:grid;gap:10px;margin-bottom:16px;border-style:dashed;border-color:rgba(246,197,107,.4)}
+.ch-new .row{display:grid;grid-template-columns:62px 1fr;gap:8px}.ch-new .btn{justify-self:start}
+@media(min-width:900px){.ch-card.ch-adm,.ch-new{max-width:760px}}
