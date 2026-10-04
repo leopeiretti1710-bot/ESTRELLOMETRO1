@@ -18,3 +18,4 @@ body{font-family:Poppins,Inter,system-ui,sans-serif;background:radial-gradient(e
 @media(min-width:900px){.event{display:grid;grid-template-columns:230px 1fr}.event main{padding:24px 32px}}
 button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.notice{position:relative;z-index:1;min-height:100dvh;display:grid;place-content:center;justify-items:center;gap:14px;text-align:center;padding:24px}.notice .ic{font-size:56px}.notice p{color:var(--mut);max-width:320px}

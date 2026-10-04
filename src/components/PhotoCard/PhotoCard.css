@@ -16,3 +16,4 @@
 .pc-menu{position:absolute;right:0;top:40px;min-width:190px;padding:6px;display:grid;gap:2px;background:rgba(20,26,46,.98);z-index:30}
 .pc-menu button{border:0;background:none;color:var(--txt);font:500 13px Poppins,sans-serif;text-align:left;padding:10px 12px;border-radius:10px;cursor:pointer}
 .pc-menu button:hover{background:rgba(255,255,255,.08)}.pc-menu .dng{color:#ff7a8a}
+.pc-who{display:block;padding:8px 12px;color:var(--mut);font-size:12px;border-bottom:1px solid var(--line);margin-bottom:2px}

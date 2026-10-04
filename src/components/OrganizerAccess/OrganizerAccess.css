@@ -8,3 +8,4 @@
 .oa-code{text-transform:uppercase;letter-spacing:3px;font-weight:700;text-align:center}
 .oa-err{color:#ff7a8a;font-size:13px;min-height:18px}
 .oa-pw{display:flex;gap:8px}.oa-pw button{flex:none;width:48px;border:1px solid var(--line);background:var(--glass);border-radius:14px;cursor:pointer;font-size:18px}
+.oa-dur{display:grid;grid-template-columns:1fr 1fr;gap:8px}
