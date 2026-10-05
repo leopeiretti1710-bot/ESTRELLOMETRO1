@@ -6,3 +6,4 @@
 .wl-st{color:var(--gold);letter-spacing:6px;font-size:13px;margin-bottom:14px}
 .wl p{color:var(--mut);line-height:1.5}.wl p b{display:block;color:var(--gold);font-weight:600;font-size:17px}
 .wl-b{display:grid;gap:14px;width:100%;margin-top:38px}
+.wl-v{margin-top:28px;color:var(--mut);font-size:11px;opacity:.7}

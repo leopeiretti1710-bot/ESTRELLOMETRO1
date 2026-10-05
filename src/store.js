@@ -18,6 +18,11 @@ const keep=(c,p)=>{try{localStorage.setItem("estrellometro:pin:"+c,p)}catch{}};
 export const savedPin=c=>{try{return localStorage.getItem("estrellometro:pin:"+c)||""}catch{return""}};
 export const savedName=()=>{try{return localStorage.getItem("estrellometro:name")||""}catch{return""}};
 const ev=c=>doc(db,"events",c),ph=(c,id)=>doc(db,"events",c,"photos",id);
+// Estrellas = base + cantidad de votantes. Así el número nunca puede desfasarse de la lista de votos.
+// base: 0 para fotos reales; para las 8 fotos de demo (ids s0..s7) es su puntaje inicial.
+const baseOf=(id,x)=>x.base??(/^s\d$/.test(id)?Math.max(0,(x.stars||0)-(x.voters||[]).length):0);
+const norm=d=>{const x=d.data(),v=x.voters||[];return{id:d.id,...x,voters:v,stars:baseOf(d.id,x)+v.length}};
+const inflight=new Set();
 
 /* ---- Estado local alimentado por Firestore ---- */
 let cache={events:{},loaded:false};const subs=new Set(),extra={};
@@ -27,7 +32,7 @@ export const useDB=()=>useSyncExternalStore(f=>(subs.add(f),()=>subs.delete(f)),
 onSnapshot(collection(db,"events"),snap=>{set(c=>{const events={};snap.forEach(d=>{events[d.id]={...d.data(),photos:[],members:[],...extra[d.id]}});return{events,loaded:true}});sweep()},e=>console.error("Firestore events:",e));
 // Fotos e invitados de UN evento en tiempo real (App.jsx lo llama al entrar). Devuelve el "unsubscribe".
 export const watch=code=>{extra[code]={photos:[],members:[],...extra[code]};
- const a=onSnapshot(query(collection(db,"events",code,"photos"),orderBy("t","desc")),s=>{extra[code].photos=s.docs.map(d=>({id:d.id,...d.data()}));set(c=>merge(c,code))},e=>console.error("Firestore photos:",e));
+ const a=onSnapshot(query(collection(db,"events",code,"photos"),orderBy("t","desc")),s=>{extra[code].photos=s.docs.map(norm);set(c=>merge(c,code))},e=>console.error("Firestore photos:",e));
  const b=onSnapshot(collection(db,"events",code,"members"),s=>{extra[code].members=s.docs.map(d=>({id:d.id,...d.data()})).sort((x,y)=>x.joinedAt-y.joinedAt);set(c=>merge(c,code))},e=>console.error("Firestore members:",e));
  return()=>{a();b()}};
 
@@ -66,8 +71,9 @@ export const act={
   s.exists()?await updateDoc(m,{name}):await setDoc(m,{name,joinedAt:Date.now(),blocked:false});
   await updateDoc(ev(c),{guests:arrayUnion(me)});try{localStorage.setItem("estrellometro:name",name)}catch{}return c},
  addPhoto:(c,src,ch)=>blocked(c)?Promise.resolve():addDoc(collection(db,"events",c,"photos"),{src,t:Date.now(),stars:0,voters:[],hidden:false,ch:ch??null,uid:me}),
- vote:(c,id)=>cache.events[c]?.active&&!blocked(c)?runTransaction(db,async t=>{const r=ph(c,id),s=await t.get(r);if(!s.exists())return;
-  const v=s.data().voters,i=v.indexOf(me);i<0?t.update(r,{voters:[...v,me],stars:s.data().stars+1}):t.update(r,{voters:v.filter(x=>x!==me),stars:s.data().stars-1})}):Promise.resolve(),
+ vote:(c,id)=>{if(!cache.events[c]?.active||blocked(c)||inflight.has(id))return Promise.resolve();inflight.add(id);
+  return runTransaction(db,async t=>{const r=ph(c,id),s=await t.get(r);if(!s.exists())return;const x=s.data(),v=x.voters||[],b=baseOf(id,x),nv=v.includes(me)?v.filter(u=>u!==me):[...v,me];
+   t.update(r,{voters:nv,stars:b+nv.length,base:b})}).catch(e=>console.warn("Voto no registrado",e)).finally(()=>inflight.delete(id))},
  setActive:(c,v)=>updateDoc(ev(c),{active:v}),
  hide:(c,id)=>updateDoc(ph(c,id),{hidden:!cache.events[c].photos.find(p=>p.id===id)?.hidden}),
  del:(c,id)=>deleteDoc(ph(c,id)),
@@ -80,4 +86,4 @@ export const act={
 (async()=>{try{const id="ESTRELLA2026",s=await getDoc(ev(id)),adminHash=pinHash(id,"1234");
  if(s.exists()){if(Date.now()<s.data().end){if(!s.data().adminHash)await updateDoc(ev(id),{adminHash});return}await purge(id)}
  await setDoc(ev(id),{code:id,name:"Boda Sofía & Lucas 💍",active:true,end:Date.now()+3*36e5,guests:[],guestList:[],challenges:CH(),adminHash});
- await Promise.all(SAMPLES.map((s,i)=>setDoc(ph(id,"s"+i),{src:art(...s,[480,420,520,440,500,460,430,490][i]),t:Date.now()-i*17*6e4,stars:[47,38,33,29,24,19,15,9][i],voters:[],hidden:false,ch:null,uid:null})))}catch(e){console.error("Seed demo:",e)}})();
+ await Promise.all(SAMPLES.map((s,i)=>setDoc(ph(id,"s"+i),{src:art(...s,[480,420,520,440,500,460,430,490][i]),t:Date.now()-i*17*6e4,stars:[47,38,33,29,24,19,15,9][i],base:[47,38,33,29,24,19,15,9][i],voters:[],hidden:false,ch:null,uid:null})))}catch(e){console.error("Seed demo:",e)}})();
